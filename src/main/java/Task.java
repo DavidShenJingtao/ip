@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getDone() {
-        return (isDone ? "[X]" : "[ ]");
+        return (isDone ? "X" : " ");
     }
 
     public void markAsDone() {
@@ -21,6 +21,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return getDone() + " " + description;
+        return String.format("[%s] %s", getDone(), description);
     }
 }
