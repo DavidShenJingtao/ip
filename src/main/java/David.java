@@ -1,14 +1,25 @@
+import java.util.Scanner;
+
 public class David {
     public static void main(String[] args) {
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);*/
+        //welcome page
         String newline = "----------------------------------------";
-        System.out.println(newline + "\n" + "Hello! I'm David.\n"
-            + "What can I do for you?\n\n" + newline + "\n"
-            + "Bye. Hope to see you again soon!\n\n" + newline);
+        String welcome = newline + "\nHello! I'm David.\n"
+                    + "What can I do for you?\n\n" + newline + "\n";
+        System.out.println(welcome.indent(4));
+
+        //user input
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        while (!s.equals("bye")) {
+            String msg = newline + "\n" + s
+                        + "\n\n" + newline + "\n";
+            System.out.println(msg.indent(4));
+            s = sc.nextLine();
+        }
+        String bye = newline + "\nBye. Hope to see you again soon!\n\n"
+                    + newline + "\n";
+        System.out.println(bye.indent(4));
+        sc.close();
     }
 }
