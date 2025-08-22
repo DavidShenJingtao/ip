@@ -2,9 +2,9 @@ todo read book
 deadline return book /by June 6th
 event project meeting /from Aug 6th 2pm /to 4pm
 mark 1
-mark 2
+mark 3
 todo join sports club
-unmark 2
+unmark 3
 todo borrow book
 mark 4
 list
@@ -17,4 +17,8 @@ unmark -1
 mark 3d
 deadline see
 event go /from 3
+delete 7
+mark 2
+delete 6
+list
 bye
