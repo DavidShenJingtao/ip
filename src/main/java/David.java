@@ -87,20 +87,21 @@ public class David {
     }
 
     public static Task parseTask(String[] strarr) throws DavidException {
-        String type = strarr[0];
-        if (!type.equals("todo") && !type.equals("deadline")
+        //String s = strarr[0];
+        /*if (!type.equals("todo") && !type.equals("deadline")
                 && !type.equals("event")) {
             throw new InvalidTypeException(type);
-        }
+        }*/
+        TaskType type = TaskType.of(strarr[0]);
         if (strarr.length <= 1) {
-            throw new EmptyDescriptionException(type);
+            throw new EmptyDescriptionException(strarr[0]);
         }
         String description;
         switch (type) {
-            case "todo":
+            case TODO:
                 description = strarr[1];
                 return new ToDo(description);
-            case "deadline":
+            case DEADLINE:
                 String[] by = strarr[1].split(" /by ", 2);
                 if (by.length < 2) {
                     String m = "the correct format of deadline should be: " +
@@ -109,7 +110,7 @@ public class David {
                 }
                 description = by[0] + " (by: " + by[1] + ")";
                 return new Deadline(description);
-            case "event":
+            case EVENT:
                 String m = "the correct format of event should be: " +
                         "event [task name] /from [start time] /to [end time].";
                 String[] from = strarr[1].split(" /from ", 2);
@@ -124,7 +125,7 @@ public class David {
                             + to[0] + " to: " + to[1] + ")";
                 return new Event(description);
             default:
-                throw new InvalidTypeException(type);
+                throw new InvalidTypeException(strarr[0]);
         }
     }
 

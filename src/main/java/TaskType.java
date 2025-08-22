@@ -1,15 +1,15 @@
 public enum TaskType {
     TODO("todo"), DEADLINE("deadline"), EVENT("event");
 
-    private String type;
+    private String name;
 
-    TaskType(String type) {
-        this.type = type;
+    TaskType(String name) {
+        this.name = name;
     }
 
     public static TaskType of(String s) throws InvalidTypeException {
         for (TaskType t : TaskType.values()) {
-            if (s.equals(t.type)) {
+            if (s.equals(t.name)) {
                 return t;
             }
         }
