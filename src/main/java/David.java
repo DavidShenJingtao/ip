@@ -87,11 +87,6 @@ public class David {
     }
 
     public static Task parseTask(String[] strarr) throws DavidException {
-        //String s = strarr[0];
-        /*if (!type.equals("todo") && !type.equals("deadline")
-                && !type.equals("event")) {
-            throw new InvalidTypeException(type);
-        }*/
         TaskType type = TaskType.of(strarr[0]);
         if (strarr.length <= 1) {
             throw new EmptyDescriptionException(strarr[0]);
