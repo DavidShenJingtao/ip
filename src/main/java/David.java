@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,6 +10,26 @@ public class David {
     private static final String newline = s.repeat(100);
     private static int totalTasks = 0;
     private static ArrayList<Task> list = new ArrayList<>();
+
+    //relative, OS-dependent path
+    private static final Path path = Paths.get("data", "David.txt");
+
+    //initialize a file: ensure file and folder exist
+    private static void initFile() {
+        try {
+            //check if parent folder exists
+            if (Files.notExists(path.getParent())) {
+                Files.createDirectories(path.getParent());
+            }
+            //check if file exists
+            if (Files.notExists(path)) {
+                Files.createFile(path);
+            }
+        } catch (IOException e) {
+            System.out.println(format(e.getMessage()));
+        }
+
+    }
 
     //helper function: check if integer
     public static boolean isInteger(String s) {
@@ -125,6 +149,8 @@ public class David {
     }
 
     public static void main(String[] args) {
+        initFile();
+
         //welcome page
         String welcome = "Hello! I'm David.\n What can I do for you?";
         System.out.println(format(welcome));
