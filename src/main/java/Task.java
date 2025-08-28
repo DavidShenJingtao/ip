@@ -85,9 +85,9 @@ public class Task {
         Task task;
         String todo = "the input format of todo should be: T | 0/1 | [description].";
         String ddl = "the input format of deadline should be: "
-                     + "D | 0/1 | [description] | [end time].";
+                + "D | 0/1 | [description] | [end time].";
         String event = "the input format for event should be: "
-                     + "E | 0/1 | [description] | [start time] - [end time].";
+                + "E | 0/1 | [description] | [start time] - [end time].";
 
         switch (type) {
             case "T":
