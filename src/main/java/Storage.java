@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,10 +24,11 @@ public class Storage {
     }
 
     public void save(ArrayList<Task> list) throws IOException {
-        BufferedWriter bw = Files.newBufferedWriter(path);
+        FileWriter fw = new FileWriter(path.toFile(), false);
         for (Task t : list) {
-            bw.write(t.toString() + System.lineSeparator());
+            fw.write(t.toString() + System.lineSeparator());
         }
+        fw.close();
     }
 
     public ArrayList<Task> load() throws IOException {
@@ -43,6 +43,7 @@ public class Storage {
         }
         return list;
     }
+
 
     private static void loadTasks(ArrayList<Task> list, String line) {
         try {

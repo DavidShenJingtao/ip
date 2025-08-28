@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,6 +8,8 @@ public class David {
     private static final String newline = s.repeat(100);
     private static int totalTasks = 0;
     private static ArrayList<Task> list = new ArrayList<>();
+    private static Storage storage = new Storage(Paths.get("data",
+                                                "David.txt").toString());
 
     //helper function: check if integer
     public static boolean isInteger(String s) {
@@ -29,7 +33,7 @@ public class David {
     public static void printList() {
         String start = newline + "\n Here are the tasks in your list: ";
         System.out.print(start.indent(4));
-        for (int i = 0; i < totalTasks; i++) {
+        for (int i = 0; i < list.size(); i++) {
             String msg = String.format(" %d. %s", i + 1, list.get(i));
             System.out.print(msg.indent(4));
         }
@@ -87,9 +91,19 @@ public class David {
     }
 
     public static void main(String[] args) {
+        //initialize storage
+        try {
+            storage.init();
+            list = storage.load();
+            totalTasks = list.size();
+        } catch (IOException e) {
+            System.out.println(format(e.getMessage()));
+        }
+
         //welcome page
         String welcome = "Hello! I'm David.\n What can I do for you?";
         System.out.println(format(welcome));
+
         //user input
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
@@ -107,10 +121,7 @@ public class David {
             } else if (strarr[0].equals("mark")) {
                 try {
                     mark(s);
-                } catch (NumberException e1) {
-                    System.out.println(format(e1.getMessage()));
-                } catch (IndexException e2) {
-                    System.out.println(format(e2.getMessage()));
+                    saveTasks();
                 } catch (DavidException e) {
                     System.out.println(format(e.getMessage()));
                 }
@@ -118,10 +129,7 @@ public class David {
             } else if (strarr[0].equals("unmark")) {
                 try {
                     unmark(s);
-                } catch (NumberException e1) {
-                    System.out.println(format(e1.getMessage()));
-                } catch (IndexException e2) {
-                    System.out.println(format(e2.getMessage()));
+                    saveTasks();
                 } catch (DavidException e) {
                     System.out.println(format(e.getMessage()));
                 }
@@ -129,10 +137,7 @@ public class David {
             } else if (strarr[0].equals("delete")) {
                 try {
                     delete(s);
-                } catch (NumberException e1) {
-                    System.out.println(format(e1.getMessage()));
-                } catch (IndexException e2) {
-                    System.out.println(format(e2.getMessage()));
+                    saveTasks();
                 } catch (DavidException e) {
                     System.out.println(format(e.getMessage()));
                 }
@@ -142,22 +147,25 @@ public class David {
                     Task t = Task.of(s);
                     list.add(t);
                     totalTasks++;
+                    saveTasks();
                     String task = (totalTasks > 1) ? "tasks" : "task";
                     String msg = "Got it. I've added this task:\n  "
                             + t + "\n Now you have " + totalTasks + " "
                             + task + " in the list.";
                     System.out.println(format(msg));
-                } catch (InvalidTypeException e1) {
-                    System.out.println(format(e1.getMessage()));
-                } catch (EmptyDescriptionException e2) {
-                    System.out.println(format(e2.getMessage()));
-                } catch (FormatException e3) {
-                    System.out.println(format(e3.getMessage()));
                 } catch (DavidException e) {
                     System.out.println(format(e.getMessage()));
                 }
             }
         }
         sc.close();
+    }
+
+    private static void saveTasks() {
+        try {
+            storage.save(list);
+        } catch (IOException e) {
+            System.out.println(format("Error: " + e.getMessage()));
+        }
     }
 }

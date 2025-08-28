@@ -72,23 +72,22 @@ public class Task {
     public static Task create(String line) throws DavidException {
         String[] strarr = line.split("\\s*\\|\\s*");
         String type = strarr[0];
-        String status = "wrong status format (1 for done, 0 for undone) in the input line";
-        if (strarr.length <= 1) {
-            throw new FormatException(status);
+        if (!type.equals("T") && !type.equals("D") && !type.equals("E")) {
+            throw new InvalidTypeException(type);
         }
-
-        if (!strarr[1].equals("0") && !strarr[1].equals("1")) {
+        String status = "wrong status format (1 for done, 0 for undone) in the input line.";
+        if (strarr.length <= 1 || (!strarr[1].equals("0") && !strarr[1].equals("1"))) {
             throw new FormatException(status);
         }
 
         boolean flag = strarr[1].equals("1"); //true if is done
         String description;
         Task task;
-        String todo = "the input format of todo should be: T | 0/1 | [description]";
+        String todo = "the input format of todo should be: T | 0/1 | [description].";
         String ddl = "the input format of deadline should be: "
                      + "D | 0/1 | [description] | [end time].";
         String event = "the input format for event should be: "
-                     + "E | 0/1 | [description] | [start time] - [end time]";
+                     + "E | 0/1 | [description] | [start time] - [end time].";
 
         switch (type) {
             case "T":
