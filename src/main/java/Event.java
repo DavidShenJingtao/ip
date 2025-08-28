@@ -1,12 +1,17 @@
 public class Event extends Task {
     private static final String type = "E";
+    private String from;
+    private String to;
 
-    public Event(String description) {
+    public Event(String description, String from, String to) {
         super(description);
+        this.from = from;
+        this.to = to;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s]%s", type, super.toString());
+        return String.format("%s | %s | %s - %s", type,
+                            super.toString(), from, to);
     }
 }
