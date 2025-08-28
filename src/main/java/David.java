@@ -1,7 +1,3 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,26 +6,6 @@ public class David {
     private static final String newline = s.repeat(100);
     private static int totalTasks = 0;
     private static ArrayList<Task> list = new ArrayList<>();
-
-    //relative, OS-dependent path
-    private static final Path path = Paths.get("data", "David.txt");
-
-    //initialize a file: ensure file and folder exist
-    private static void initFile() {
-        try {
-            //check if parent folder exists
-            if (Files.notExists(path.getParent())) {
-                Files.createDirectories(path.getParent());
-            }
-            //check if file exists
-            if (Files.notExists(path)) {
-                Files.createFile(path);
-            }
-        } catch (IOException e) {
-            System.out.println(format(e.getMessage()));
-        }
-
-    }
 
     //helper function: check if integer
     public static boolean isInteger(String s) {
@@ -105,62 +81,27 @@ public class David {
         totalTasks--;
         String task = (totalTasks > 1) ? "tasks" : "task";
         String msg = "Noted, I've removed this task:\n  " + t
-                    + "\n Now you have " + totalTasks + " "
-                    + task + " in the list.";
+                + "\n Now you have " + totalTasks + " "
+                + task + " in the list.";
         System.out.println(format(msg));
     }
 
-    public static Task parseTask(String[] strarr) throws DavidException {
-        TaskType type = TaskType.of(strarr[0]);
-        if (strarr.length <= 1) {
-            throw new EmptyDescriptionException(strarr[0]);
-        }
-        String description;
-        switch (type) {
-            case TODO:
-                description = strarr[1];
-                return new ToDo(description);
-            case DEADLINE:
-                String[] by = strarr[1].split(" /by ", 2);
-                if (by.length < 2) {
-                    String m = "the correct format of deadline should be: " +
-                            "deadline [task name] /by [time].";
-                    throw new FormatException(m);
-                }
-                description = by[0] + " (by: " + by[1] + ")";
-                return new Deadline(description);
-            case EVENT:
-                String m = "the correct format of event should be: " +
-                        "event [task name] /from [start time] /to [end time].";
-                String[] from = strarr[1].split(" /from ", 2);
-                if (from.length < 2) {
-                    throw new FormatException(m);
-                }
-                String[] to = from[1].split(" /to ", 2);
-                if (to.length < 2) {
-                    throw new FormatException(m);
-                }
-                description = from[0] + " (from: "
-                            + to[0] + " to: " + to[1] + ")";
-                return new Event(description);
-            default:
-                throw new InvalidTypeException(strarr[0]);
-        }
-    }
-
     public static void main(String[] args) {
-        initFile();
-
         //welcome page
         String welcome = "Hello! I'm David.\n What can I do for you?";
         System.out.println(format(welcome));
         //user input
         Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
+        boolean isExit = false;
 
-        while (!s.equals("bye")) {
+        while (!isExit && sc.hasNextLine()) {
+            String s = sc.nextLine();
             String[] strarr = s.split(" ", 2);
-            if (s.equals("list")) {
+            if (s.equals("bye")) {
+                isExit = true;
+                String bye = "Bye. Hope to see you again soon!";
+                System.out.println(format(bye));
+            } else if (s.equals("list")) {
                 printList();
 
             } else if (strarr[0].equals("mark")) {
@@ -198,7 +139,7 @@ public class David {
 
             } else {
                 try {
-                    Task t = parseTask(strarr);
+                    Task t = Task.of(s);
                     list.add(t);
                     totalTasks++;
                     String task = (totalTasks > 1) ? "tasks" : "task";
@@ -216,10 +157,7 @@ public class David {
                     System.out.println(format(e.getMessage()));
                 }
             }
-            s = sc.nextLine();
         }
-        String bye = "Bye. Hope to see you again soon!";
-        System.out.println(format(bye));
         sc.close();
     }
 }
