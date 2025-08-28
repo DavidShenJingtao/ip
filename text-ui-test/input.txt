@@ -13,4 +13,9 @@ mark 2
 unmark 4
 delete 6
 list
+deadline return book /by 2019-08-02 800
+delete 6
+deadline return book /by 2019-08-02 0800
+deadline return book /by 2019-12-02 1800
+list
 bye
