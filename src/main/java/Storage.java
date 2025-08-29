@@ -64,7 +64,7 @@ public class Storage {
             Task t = Task.create(line);
             list.add(t);
         } catch (DavidException e) {
-            System.out.println(Formatter.format(e.getMessage()));
+            System.out.println(Formatter.format("Corrupted input: " + e.getMessage()));
         }
     }
 }
