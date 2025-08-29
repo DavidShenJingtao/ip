@@ -41,7 +41,6 @@ public class Task {
                     throw new FormatException(m);
                 }
                 description = by[0];
-                //description = by[0] + " (by: " + by[1] + ")";
                 String by_t = by[1];
                 return new Deadline(description, by_t);
 
@@ -85,47 +84,47 @@ public class Task {
         Task task;
         String todo = "the input format of todo should be: T | 0/1 | [description].";
         String ddl = "the input format of deadline should be: "
-                + "D | 0/1 | [description] | [end time].";
+                            + "D | 0/1 | [description] | [end time].";
         String event = "the input format for event should be: "
                 + "E | 0/1 | [description] | [start time] - [end time].";
 
         switch (type) {
-            case "T":
-                if (strarr.length <= 2) {
-                    throw new FormatException(todo);
-                }
-                description = strarr[2];
-                task = new ToDo(description);
-                if (flag) task.markAsDone();
-                return task;
+        case "T":
+            if (strarr.length <= 2) {
+                throw new FormatException(todo);
+            }
+            description = strarr[2];
+            task = new ToDo(description);
+            if (flag) task.markAsDone();
+            return task;
 
-            case "D":
-                if (strarr.length <= 3) {
-                    throw new FormatException(ddl);
-                }
-                description = strarr[2];
-                String by = strarr[3];
-                task = new Deadline(description, by);
-                if (flag) task.markAsDone();
-                return task;
+        case "D":
+            if (strarr.length <= 3) {
+                throw new FormatException(ddl);
+            }
+            description = strarr[2];
+            String by = strarr[3];
+            task = new Deadline(description, by);
+            if (flag) task.markAsDone();
+            return task;
 
-            case "E":
-                if (strarr.length <= 3) {
-                    throw new FormatException(event);
-                }
-                description = strarr[2];
-                String[] timeParts = strarr[3].split("\\s*-\\s*");
-                if (timeParts.length != 2) {
-                    throw new FormatException(event);
-                }
-                String from = timeParts[0];
-                String to = timeParts[1];
-                task = new Event(description, from, to);
-                if (flag) task.markAsDone();
-                return task;
+        case "E":
+            if (strarr.length <= 3) {
+                throw new FormatException(event);
+            }
+            description = strarr[2];
+            String[] timeParts = strarr[3].split("\\s*-\\s*");
+            if (timeParts.length != 2) {
+                throw new FormatException(event);
+            }
+            String from = timeParts[0];
+            String to = timeParts[1];
+            task = new Event(description, from, to);
+            if (flag) task.markAsDone();
+            return task;
 
-            default:
-                throw new InvalidTypeException(type);
+        default:
+            throw new InvalidTypeException(type);
         }
     }
 

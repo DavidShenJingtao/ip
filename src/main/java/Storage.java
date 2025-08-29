@@ -23,12 +23,26 @@ public class Storage {
         }
     }
 
-    public void save(ArrayList<Task> list) throws IOException {
+    /*public void save(ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(path.toFile(), false);
         for (Task t : list) {
             fw.write(t.toString() + System.lineSeparator());
         }
         fw.close();
+    }*/
+
+    public void save(TaskList tasks) throws DavidException {
+        try {
+            ArrayList<Task> list = tasks.getList();
+            FileWriter fw = new FileWriter(path.toFile(), false);
+            for (Task t : list) {
+                fw.write(t.toString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new SaveException("cannot save changes.");
+        }
+        
     }
 
     public ArrayList<Task> load() throws IOException {
@@ -50,7 +64,7 @@ public class Storage {
             Task t = Task.create(line);
             list.add(t);
         } catch (DavidException e) {
-            System.out.println(David.format(e.getMessage()));
+            System.out.println(Formatter.format(e.getMessage()));
         }
     }
 }
