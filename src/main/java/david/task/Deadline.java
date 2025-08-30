@@ -36,7 +36,7 @@ public class Deadline extends Task {
         }
     }
 
-    public String printDate() {
+    private String printDate() {
         if (!isValidDate) {
             return this.by;
         }

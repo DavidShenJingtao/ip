@@ -30,7 +30,7 @@ public class Event extends Task {
         toInit();
     }
 
-    public void fromInit() {
+    private void fromInit() {
         try {
             if (this.from.contains(" ")) { //time?
                 DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -49,7 +49,7 @@ public class Event extends Task {
         } 
     }
 
-    public void toInit() {
+    private void toInit() {
         try {
             if (this.to.contains(" ")) { //time?
                 DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -68,7 +68,7 @@ public class Event extends Task {
         }
     }
 
-    public String printFromDate() {
+    private String printFromDate() {
         if (!fromIsValidDate) {
             return this.from;
         }
@@ -83,7 +83,7 @@ public class Event extends Task {
         }
     }
 
-    public String printToDate() {
+    private String printToDate() {
         if (!toIsValidDate) {
             return this.to;
         }
