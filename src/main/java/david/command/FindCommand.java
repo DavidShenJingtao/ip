@@ -11,9 +11,16 @@ import david.ui.TaskList;
 import david.ui.Ui;
 import java.util.ArrayList;
 
+/**
+ * Prints the list of task given the keyword of the command.
+ */
 public class FindCommand extends Command {
     private String command;
 
+    /**
+     *
+     * @param command The entire command.
+     */
     public FindCommand(String command) {
         super();
         this.command = command;
