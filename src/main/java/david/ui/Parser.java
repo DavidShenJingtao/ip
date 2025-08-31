@@ -4,6 +4,7 @@ import david.command.AddCommand;
 import david.command.Command;
 import david.command.DeleteCommand;
 import david.command.ExitCommand;
+import david.command.FindCommand;
 import david.command.ListCommand;
 import david.command.MarkCommand;
 import david.command.UnmarkCommand;
@@ -44,6 +45,9 @@ public class Parser {
 
         case "delete":
             return new DeleteCommand(command);
+
+        case "find":
+            return new FindCommand(command);
 
         default:
             return new AddCommand(command);
