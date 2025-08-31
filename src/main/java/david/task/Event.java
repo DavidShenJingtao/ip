@@ -7,6 +7,9 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
+/**
+ * A task that has starting time and ending time.
+ */
 public class Event extends Task {
     private static final String type = "E";
     private String from;
@@ -22,6 +25,12 @@ public class Event extends Task {
     private LocalDate toDate;
     private LocalDateTime toDateTime;
 
+    /**
+     *
+     * @param description Description of the task event.
+     * @param from Starting time of the event.
+     * @param to Ending time of the event.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = from;

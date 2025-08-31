@@ -12,9 +12,16 @@ import david.ui.Storage;
 import david.ui.TaskList;
 import david.ui.Ui;
 
+/**
+ * Marks a specific task as 'undone' given the index from the command.
+ */
 public class UnmarkCommand extends Command {
     private String command;
 
+    /**
+     *
+     * @param command The entire unmark command.
+     */
     public UnmarkCommand(String command) {
         super();
         this.command = command;

@@ -7,6 +7,9 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
+/**
+ * A task that has deadline.
+ */
 public class Deadline extends Task {
     private static final String type = "D";
     private String by;
@@ -15,6 +18,11 @@ public class Deadline extends Task {
     private LocalDate date;
     private LocalDateTime dateTime;
 
+    /**
+     *
+     * @param description Description of the deadline task.
+     * @param by The end time of the task.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
