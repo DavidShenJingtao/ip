@@ -37,6 +37,17 @@ public class TaskList {
         System.out.println();
     }
 
+    public void printMatchList() {
+        String start = Formatter.NEWLINE + "\n Here are the matching tasks in your list: ";
+        System.out.print(start.indent(4));
+        for (int i = 0; i < list.size(); i++) {
+            String msg = String.format(" %d. %s", i + 1, list.get(i));
+            System.out.print(msg.indent(4));
+        }
+        System.out.print(Formatter.NEWLINE.indent(4));
+        System.out.println();
+    }
+
     public Task get(int index) {
         return list.get(index);
     }
