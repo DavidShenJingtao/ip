@@ -60,41 +60,41 @@ public class Task {
 
         String description;
         switch (type) {
-            case TODO:
-                description = strarr[1];
-                return new ToDo(description);
+        case TODO:
+            description = strarr[1];
+            return new ToDo(description);
 
-            case DEADLINE:
-                String[] by = strarr[1].split(" /by ", 2);
-                if (by.length < 2) {
-                    String m = "the command format of deadline should be: " +
-                            "deadline [task name] /by [time].";
-                    throw new FormatException(m);
-                }
-                description = by[0];
-                String by_t = by[1];
-                return new Deadline(description, by_t);
+        case DEADLINE:
+            String[] by = strarr[1].split(" /by ", 2);
+            if (by.length < 2) {
+                String m = "the command format of deadline should be: " +
+                        "deadline [task name] /by [time].";
+                throw new FormatException(m);
+            }
+            description = by[0];
+            String by_t = by[1];
+            return new Deadline(description, by_t);
 
-            case EVENT:
-                String m = "the command format of event should be: " +
-                        "event [task name] /from [start time] /to [end time].";
-                String[] from = strarr[1].split(" /from ", 2);
-                if (from.length < 2) {
-                    throw new FormatException(m);
-                }
-                String[] to = from[1].split(" /to ", 2);
-                if (to.length < 2) {
-                    throw new FormatException(m);
-                }
+        case EVENT:
+            String m = "the command format of event should be: " +
+                    "event [task name] /from [start time] /to [end time].";
+            String[] from = strarr[1].split(" /from ", 2);
+            if (from.length < 2) {
+                throw new FormatException(m);
+            }
+            String[] to = from[1].split(" /to ", 2);
+            if (to.length < 2) {
+                throw new FormatException(m);
+            }
                 /*description = from[0] + " (from: "
                         + to[0] + " to: " + to[1] + ")";*/
-                description = from[0];
-                String from_t = to[0];
-                String to_t = to[1];
-                return new Event(description, from_t, to_t);
+            description = from[0];
+            String from_t = to[0];
+            String to_t = to[1];
+            return new Event(description, from_t, to_t);
 
-            default:
-                throw new InvalidTypeException(strarr[0]);
+        default:
+            throw new InvalidTypeException(strarr[0]);
         }
     }
 
@@ -121,7 +121,7 @@ public class Task {
         Task task;
         String todo = "the input format of todo should be: T | 0/1 | [description].";
         String ddl = "the input format of deadline should be: "
-                            + "D | 0/1 | [description] | [end time].";
+                + "D | 0/1 | [description] | [end time].";
         String event = "the input format for event should be: "
                 + "E | 0/1 | [description] | [start time] - [end time].";
 
@@ -132,7 +132,9 @@ public class Task {
             }
             description = strarr[2];
             task = new ToDo(description);
-            if (flag) task.markAsDone();
+            if (flag) {
+                task.markAsDone();
+            }
             return task;
 
         case "D":
@@ -142,7 +144,9 @@ public class Task {
             description = strarr[2];
             String by = strarr[3];
             task = new Deadline(description, by);
-            if (flag) task.markAsDone();
+            if (flag) {
+                task.markAsDone();
+            }
             return task;
 
         case "E":
@@ -157,7 +161,9 @@ public class Task {
             String from = timeParts[0];
             String to = timeParts[1];
             task = new Event(description, from, to);
-            if (flag) task.markAsDone();
+            if (flag) {
+                task.markAsDone();
+            }
             return task;
 
         default:
