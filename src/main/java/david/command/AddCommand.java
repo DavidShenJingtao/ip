@@ -10,9 +10,16 @@ import david.ui.Storage;
 import david.ui.TaskList;
 import david.ui.Ui;
 
+/**
+ * Adds a task to the list.
+ */
 public class AddCommand extends Command {
     private String command;
 
+    /**
+     *
+     * @param command The entire add command.
+     */
     public AddCommand(String command) {
         super();
         this.command = command;

@@ -20,13 +20,25 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Deals with file storage issues.
+ */
 public class Storage {
     private final Path path;
 
+    /**
+     *
+     * @param p Path name of the file to be overwritten.
+     */
     public Storage(String p) {
         this.path = Paths.get(p);
     }
 
+    /**
+     * Initialize the storage object.
+     *
+     * @throws IOException If initialization fails.
+     */
     public void init() throws IOException {
         if (Files.notExists(path.getParent())) {
             Files.createDirectories(path.getParent());
@@ -36,14 +48,12 @@ public class Storage {
         }
     }
 
-    /*public void save(ArrayList<Task> list) throws IOException {
-        FileWriter fw = new FileWriter(path.toFile(), false);
-        for (Task t : list) {
-            fw.write(t.toString() + System.lineSeparator());
-        }
-        fw.close();
-    }*/
-
+    /**
+     * Save the tasks to the data file.
+     *
+     * @param tasks The list of tasks.
+     * @throws DavidException If saving tasks fails.
+     */
     public void save(TaskList tasks) throws DavidException {
         try {
             ArrayList<Task> list = tasks.getList();
@@ -58,6 +68,12 @@ public class Storage {
         
     }
 
+    /**
+     * Load tasks from the data file to an array list.
+     *
+     * @return An ArrayList of tasks.
+     * @throws IOException If loading fails.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> list = new ArrayList<>();
         if (Files.notExists(path)) {
@@ -70,7 +86,6 @@ public class Storage {
         }
         return list;
     }
-
 
     private static void loadTasks(ArrayList<Task> list, String line) {
         try {

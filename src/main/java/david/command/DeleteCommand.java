@@ -12,9 +12,16 @@ import david.ui.Storage;
 import david.ui.TaskList;
 import david.ui.Ui;
 
+/**
+ * Deletes a task from the list.
+ */
 public class DeleteCommand extends Command {
     private String command;
 
+    /**
+     *
+     * @param command The entire delete command.
+     */
     public DeleteCommand(String command) {
         super();
         this.command = command;

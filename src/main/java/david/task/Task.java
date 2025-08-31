@@ -5,28 +5,52 @@ import david.exception.EmptyDescriptionException;
 import david.exception.FormatException;
 import david.exception.InvalidTypeException;
 
+/**
+ * A parent class for all tasks.
+ */
 public class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     *
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Shows whether the task is done.
+     *
+     * @return 1 if the task is done, 0 otherwise.
+     */
     public int getDone() {
         return (isDone ? 1 : 0);
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Marks the task as not done.
+     */
     public void markAsUndone() {
         this.isDone = false;
     }
 
-    //create tasks from command
+    /**
+     * Creates a task from the command line.
+     *
+     * @param s The entire command.
+     * @return A task given by the command.
+     * @throws DavidException If parsing the task fails.
+     */
     public static Task of(String s) throws DavidException {
         String[] strarr = s.split(" ", 2);
         TaskType type = TaskType.of(strarr[0]);
@@ -74,7 +98,13 @@ public class Task {
         }
     }
 
-    //create tasks from input file
+    /**
+     * Creates a task from the input file.
+     *
+     * @param line A line from the input file.
+     * @return A task given by the input line.
+     * @throws DavidException If parsing the task fails.
+     */
     public static Task create(String line) throws DavidException {
         String[] strarr = line.split("\\s*\\|\\s*");
         String type = strarr[0];

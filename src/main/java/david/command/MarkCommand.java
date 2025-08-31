@@ -12,9 +12,16 @@ import david.ui.Storage;
 import david.ui.TaskList;
 import david.ui.Ui;
 
+/**
+ * Marks a specific task as 'done' given the index from the command.
+ */
 public class MarkCommand extends Command {
     private String command;
 
+    /**
+     *
+     * @param command The entire mark command.
+     */
     public MarkCommand(String command) {
         super();
         this.command = command;

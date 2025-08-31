@@ -7,6 +7,9 @@ import david.task.ToDo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores all tasks.
+ */
 public class TaskList {
     private ArrayList<Task> list;
 
@@ -14,18 +17,34 @@ public class TaskList {
         this.list = list;
     }
 
+    /**
+     * Overloads the constructor, returns an empty list.
+     */
     public TaskList() {
         this.list = new ArrayList<Task>();
     }
 
+    /**
+     * Add new tasks to the list.
+     *
+     * @param t A task to be added.
+     */
     public void add(Task t) {
         this.list.add(t);
     }
 
+    /**
+     * Delete tasks from the list.
+     *
+     * @param index Index of the task to be deleted.
+     */
     public void delete(int index) {
         this.list.remove(index);
     }
 
+    /**
+     * Prints the string representation of all tasks from the list.
+     */
     public void printList() {
         String start = Formatter.NEWLINE + "\n Here are the tasks in your list: ";
         System.out.print(start.indent(4));
@@ -37,6 +56,12 @@ public class TaskList {
         System.out.println();
     }
 
+    /**
+     * Gets the task given an index.
+     *
+     * @param index The index of a task.
+     * @return The desired task.
+     */
     public Task get(int index) {
         return list.get(index);
     }
@@ -45,6 +70,9 @@ public class TaskList {
         return this.list;
     }
 
+    /**
+     * @return The size of task list.
+     */
     public int size() {
         return list.size();
     }
