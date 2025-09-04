@@ -1,16 +1,5 @@
 package david.ui;
 
-import david.exception.DavidException;
-import david.exception.EmptyDescriptionException;
-import david.exception.FormatException;
-import david.exception.IndexException;
-import david.exception.InvalidTypeException;
-import david.exception.NumberException;
-import david.exception.SaveException;
-import david.task.Deadline;
-import david.task.Event;
-import david.task.Task;
-import david.task.ToDo;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,7 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
+
+import david.exception.DavidException;
+import david.exception.SaveException;
+import david.task.Task;
 
 /**
  * Deals with file storage issues.
@@ -27,7 +19,6 @@ public class Storage {
     private final Path path;
 
     /**
-     *
      * @param p Path name of the file to be overwritten.
      */
     public Storage(String p) {
@@ -65,7 +56,6 @@ public class Storage {
         } catch (IOException e) {
             throw new SaveException("cannot save changes.");
         }
-        
     }
 
     /**

@@ -9,19 +9,13 @@ import david.command.ListCommand;
 import david.command.MarkCommand;
 import david.command.UnmarkCommand;
 import david.exception.DavidException;
-import david.exception.EmptyDescriptionException;
-import david.exception.FormatException;
-import david.exception.IndexException;
-import david.exception.InvalidTypeException;
-import david.exception.NumberException;
-import david.exception.SaveException;
 
 /**
  * Makes sense of the command line.
  */
 public class Parser {
 
-     /**
+    /**
      * @param command The whole command.
      * @return A command object for subsequent execution.
      * @throws DavidException If parsing the string fails.

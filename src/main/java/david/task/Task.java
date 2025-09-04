@@ -13,7 +13,6 @@ public class Task {
     private boolean isDone;
 
     /**
-     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -71,17 +70,17 @@ public class Task {
         case DEADLINE:
             String[] by = strarr[1].split(" /by ", 2);
             if (by.length < 2) {
-                String m = "the command format of deadline should be: " +
-                        "deadline [task name] /by [time].";
+                String m = "the command format of deadline should be: "
+                        + "deadline [task name] /by [time].";
                 throw new FormatException(m);
             }
             description = by[0];
-            String by_t = by[1];
-            return new Deadline(description, by_t);
+            String end = by[1];
+            return new Deadline(description, end);
 
         case EVENT:
-            String m = "the command format of event should be: " +
-                    "event [task name] /from [start time] /to [end time].";
+            String m = "the command format of event should be: "
+                     + "event [task name] /from [start time] /to [end time].";
             String[] from = strarr[1].split(" /from ", 2);
             if (from.length < 2) {
                 throw new FormatException(m);
@@ -90,12 +89,10 @@ public class Task {
             if (to.length < 2) {
                 throw new FormatException(m);
             }
-                /*description = from[0] + " (from: "
-                        + to[0] + " to: " + to[1] + ")";*/
             description = from[0];
-            String from_t = to[0];
-            String to_t = to[1];
-            return new Event(description, from_t, to_t);
+            String startTime = to[0];
+            String endTime = to[1];
+            return new Event(description, startTime, endTime);
 
         default:
             throw new InvalidTypeException(strarr[0]);

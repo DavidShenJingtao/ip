@@ -1,11 +1,7 @@
 package david.command;
 
 import david.exception.DavidException;
-import david.exception.SaveException;
-import david.task.Deadline;
-import david.task.Event;
 import david.task.Task;
-import david.task.ToDo;
 import david.ui.Storage;
 import david.ui.TaskList;
 import david.ui.Ui;
@@ -17,7 +13,6 @@ public class AddCommand extends Command {
     private String command;
 
     /**
-     *
      * @param command The entire add command.
      */
     public AddCommand(String command) {
@@ -36,5 +31,4 @@ public class AddCommand extends Command {
                                                 + task + " in the list.";
         ui.showMessage(msg);
     }
-
 }

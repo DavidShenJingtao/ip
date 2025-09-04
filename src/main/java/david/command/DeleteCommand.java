@@ -3,11 +3,7 @@ package david.command;
 import david.exception.DavidException;
 import david.exception.IndexException;
 import david.exception.NumberException;
-import david.exception.SaveException;
-import david.task.Deadline;
-import david.task.Event;
 import david.task.Task;
-import david.task.ToDo;
 import david.ui.Storage;
 import david.ui.TaskList;
 import david.ui.Ui;
@@ -19,7 +15,6 @@ public class DeleteCommand extends Command {
     private String command;
 
     /**
-     *
      * @param command The entire delete command.
      */
     public DeleteCommand(String command) {
@@ -40,7 +35,6 @@ public class DeleteCommand extends Command {
         Task t = tasks.get(index);
         tasks.delete(index);
         storage.save(tasks);
-        
         String task = (tasks.size() > 1) ? "tasks" : "task";
         String msg = "Noted, I've removed this task:\n  " + t
                             + "\n Now you have " + tasks.size() + " "

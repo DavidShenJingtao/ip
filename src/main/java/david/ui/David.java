@@ -1,25 +1,13 @@
 package david.ui;
 
-import david.command.AddCommand;
-import david.command.Command;
-import david.command.DeleteCommand;
-import david.command.ExitCommand;
-import david.command.ListCommand;
-import david.command.MarkCommand;
-import david.command.UnmarkCommand;
-import david.exception.DavidException;
-import david.exception.EmptyDescriptionException;
-import david.exception.FormatException;
-import david.exception.IndexException;
-import david.exception.InvalidTypeException;
-import david.exception.NumberException;
-import david.exception.SaveException;
-import david.task.Deadline;
-import david.task.Event;
-import david.task.Task;
-import david.task.ToDo;
 import java.io.IOException;
 
+import david.command.Command;
+import david.exception.DavidException;
+
+/**
+ * The chatbot is called "David" that can process commands.
+ */
 public class David {
     private Storage storage;
     private TaskList tasks;

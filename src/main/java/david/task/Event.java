@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 /**
@@ -19,14 +18,12 @@ public class Event extends Task {
     private boolean fromIsValidDate;
     private LocalDate fromDate;
     private LocalDateTime fromDateTime;
-    
     private boolean toHasTime;
     private boolean toIsValidDate;
     private LocalDate toDate;
     private LocalDateTime toDateTime;
 
     /**
-     *
      * @param description Description of the task event.
      * @param from Starting time of the event.
      * @param to Ending time of the event.
@@ -55,7 +52,7 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             this.fromHasTime = false;
             this.fromIsValidDate = false;
-        } 
+        }
     }
 
     private void toInit() {

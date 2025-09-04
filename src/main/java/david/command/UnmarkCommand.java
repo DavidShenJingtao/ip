@@ -3,11 +3,7 @@ package david.command;
 import david.exception.DavidException;
 import david.exception.IndexException;
 import david.exception.NumberException;
-import david.exception.SaveException;
-import david.task.Deadline;
-import david.task.Event;
 import david.task.Task;
-import david.task.ToDo;
 import david.ui.Storage;
 import david.ui.TaskList;
 import david.ui.Ui;
@@ -19,7 +15,6 @@ public class UnmarkCommand extends Command {
     private String command;
 
     /**
-     *
      * @param command The entire unmark command.
      */
     public UnmarkCommand(String command) {

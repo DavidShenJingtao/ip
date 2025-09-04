@@ -1,15 +1,13 @@
 package david.command;
 
+import java.util.ArrayList;
+
 import david.exception.DavidException;
 import david.exception.EmptyDescriptionException;
-import david.task.Deadline;
-import david.task.Event;
 import david.task.Task;
-import david.task.ToDo;
 import david.ui.Storage;
 import david.ui.TaskList;
 import david.ui.Ui;
-import java.util.ArrayList;
 
 /**
  * Prints the list of task given the keyword of the command.
@@ -18,7 +16,6 @@ public class FindCommand extends Command {
     private String command;
 
     /**
-     *
      * @param command The entire command.
      */
     public FindCommand(String command) {

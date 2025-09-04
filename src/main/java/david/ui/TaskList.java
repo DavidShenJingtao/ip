@@ -1,11 +1,8 @@
 package david.ui;
 
-import david.task.Deadline;
-import david.task.Event;
-import david.task.Task;
-import david.task.ToDo;
 import java.util.ArrayList;
-import java.util.List;
+
+import david.task.Task;
 
 /**
  * Stores all tasks.

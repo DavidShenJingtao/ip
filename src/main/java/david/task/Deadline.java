@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 /**
@@ -19,7 +18,6 @@ public class Deadline extends Task {
     private LocalDateTime dateTime;
 
     /**
-     *
      * @param description Description of the deadline task.
      * @param by The end time of the task.
      */
