@@ -28,4 +28,16 @@ public abstract class Command {
     public boolean isExit() {
         return false;
     }
+
+    /**
+     * Executes the command in GUI.
+     *
+     * @param tasks The list of tasks to operate on.
+     * @param ui User interface for displaying messages.
+     * @param storage Save changes in the list.
+     * @return The response of the command.
+     * @throws DavidException If execution of command goes wrong.
+     */
+    public abstract String executeGui(TaskList tasks, Ui ui,
+                                      Storage storage) throws DavidException;
 }

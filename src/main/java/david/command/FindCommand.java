@@ -40,4 +40,22 @@ public class FindCommand extends Command {
         }
         res.printMatchList();
     }
+
+    @Override
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DavidException {
+        TaskList res = new TaskList();
+        String[] strArr = this.command.split(" ");
+        if (strArr.length <= 1) {
+            throw new EmptyDescriptionException("find command");
+        }
+        String key = strArr[1];
+        ArrayList<Task> list = tasks.getList();
+        for (Task t : list) {
+            String description = t.getDescription();
+            if (description.contains(key)) {
+                res.add(t);
+            }
+        }
+        return res.printMatchListString();
+    }
 }

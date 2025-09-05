@@ -31,4 +31,16 @@ public class AddCommand extends Command {
                                                 + task + " in the list.";
         ui.showMessage(msg);
     }
+
+    @Override
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DavidException {
+        Task t = Task.of(command);
+        tasks.add(t);
+        storage.save(tasks);
+        String task = (tasks.size() > 1) ? "tasks" : "task";
+        String msg = "Got it. I've added this task:\n  "
+                + t + "\n Now you have " + tasks.size() + " "
+                + task + " in the list.";
+        return msg;
+    }
 }
