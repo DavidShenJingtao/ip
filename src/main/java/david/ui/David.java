@@ -46,6 +46,15 @@ public class David {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String response = c.executeGui(tasks, ui, storage);
+            return response;
+        } catch (DavidException e) {
+            return "Error: " + e.getMessage();
+        }
+    }
 
     public static void main(String[] args) {
         new David("data/David.txt").run();

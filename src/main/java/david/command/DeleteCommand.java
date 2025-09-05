@@ -40,9 +40,27 @@ public class DeleteCommand extends Command {
                             + "\n Now you have " + tasks.size() + " "
                                                     + task + " in the list.";
         ui.showMessage(msg);
-
     }
 
+    @Override
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DavidException {
+        String[] strarr = command.split(" ");
+        if (strarr.length <= 1 || strarr.length > 2 || !isInteger(strarr[1])) {
+            throw new NumberException("the value you entered after delete");
+        }
+        int index = Integer.valueOf(strarr[1]) - 1;
+        if (index < 0 || index > tasks.size() - 1) {
+            throw new IndexException("the value you entered after delete");
+        }
+        Task t = tasks.get(index);
+        tasks.delete(index);
+        storage.save(tasks);
+        String task = (tasks.size() > 1) ? "tasks" : "task";
+        String msg = "Noted, I've removed this task:\n  " + t
+                            + "\n Now you have " + tasks.size() + " "
+                                                    + task + " in the list.";
+        return msg;
+    }
 
     private static boolean isInteger(String s) {
         if (s == null || s.isEmpty()) {

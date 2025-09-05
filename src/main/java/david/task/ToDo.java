@@ -15,6 +15,11 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s | %s", type, super.toString());
+        return String.format("[%s]%s", type, super.toString());
+    }
+
+    @Override
+    public String serialize() {
+        return String.format("%s | %s", type, super.serialize());
     }
 }

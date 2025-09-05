@@ -29,6 +29,10 @@ public class Task {
         return (isDone ? 1 : 0);
     }
 
+    public String getDoneString() {
+        return (isDone ? "X" : " ");
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -80,7 +84,7 @@ public class Task {
 
         case EVENT:
             String m = "the command format of event should be: "
-                     + "event [task name] /from [start time] /to [end time].";
+                    + "event [task name] /from [start time] /to [end time].";
             String[] from = strarr[1].split(" /from ", 2);
             if (from.length < 2) {
                 throw new FormatException(m);
@@ -175,6 +179,10 @@ public class Task {
 
     @Override
     public String toString() {
+        return String.format("[%s] %s", this.getDoneString(), this.description);
+    }
+
+    public String serialize() {
         return String.format("%d | %s", this.getDone(), this.description);
     }
 }

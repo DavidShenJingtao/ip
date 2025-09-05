@@ -8,13 +8,13 @@ public class ToDoTest {
     @Test
     public void toDoTest() throws Exception {
         ToDo test = new ToDo("test");
-        assertEquals("T | 0 | test", test.toString());
+        assertEquals("[T][ ] test", test.toString());
 
         test.markAsDone();
-        assertEquals("T | 1 | test", test.toString());
+        assertEquals("[T][X] test", test.toString());
 
         test.markAsUndone();
-        assertEquals("T | 0 | test", test.toString());
+        assertEquals("[T][ ] test", test.toString());
 
     }
 
