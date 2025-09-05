@@ -59,7 +59,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        return String.format("[%s]%s (by: %s)", type,
+                super.toString(), printDate());
+    }
+
+    @Override
+    public String serialize() {
         return String.format("%s | %s | %s", type,
-                                super.toString(), printDate());
+                super.serialize(), printDate());
     }
 }

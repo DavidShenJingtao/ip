@@ -5,21 +5,21 @@
 
     ____________________________________________________________________________________________________
      Here are the tasks in your list: 
-     1. T | 1 | read book
-     2. D | 0 | return book | June 6th
-     3. E | 0 | project meeting | Aug 6th 2 - 4pm
-     4. T | 1 | join sports club
+     1. [T][X] read book
+     2. [D][ ] return book (by: June 6th)
+     3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+     4. [T][X] join sports club
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Got it. I've added this task:
-      D | 0 | return book | Sunday
+      [D][ ] return book (by: Sunday)
      Now you have 5 tasks in the list.
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Got it. I've added this task:
-      E | 0 | project meeting | Mon 2pm - 4pm
+      [E][ ] project meeting (from: Mon 2pm to: 4pm)
      Now you have 6 tasks in the list.
     ____________________________________________________________________________________________________
 
@@ -57,78 +57,78 @@
 
     ____________________________________________________________________________________________________
      Nice! I've mark this task as done:
-      D | 1 | return book | June 6th
+      [D][X] return book (by: June 6th)
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      OK, I've marked this task as not done yet:
-      T | 0 | join sports club
+      [T][ ] join sports club
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Noted, I've removed this task:
-      E | 0 | project meeting | Mon 2pm - 4pm
+      [E][ ] project meeting (from: Mon 2pm to: 4pm)
      Now you have 5 tasks in the list.
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Here are the tasks in your list: 
-     1. T | 1 | read book
-     2. D | 1 | return book | June 6th
-     3. E | 0 | project meeting | Aug 6th 2 - 4pm
-     4. T | 0 | join sports club
-     5. D | 0 | return book | Sunday
+     1. [T][X] read book
+     2. [D][X] return book (by: June 6th)
+     3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+     4. [T][ ] join sports club
+     5. [D][ ] return book (by: Sunday)
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Got it. I've added this task:
-      D | 0 | return book | 2019-08-02 800
+      [D][ ] return book (by: 2019-08-02 800)
      Now you have 6 tasks in the list.
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Noted, I've removed this task:
-      D | 0 | return book | 2019-08-02 800
+      [D][ ] return book (by: 2019-08-02 800)
      Now you have 5 tasks in the list.
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Got it. I've added this task:
-      D | 0 | return book | Aug 2 2019, 8:00AM
+      [D][ ] return book (by: Aug 2 2019, 8:00AM)
      Now you have 6 tasks in the list.
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Got it. I've added this task:
-      D | 0 | return book | Dec 2 2019, 6:00PM
+      [D][ ] return book (by: Dec 2 2019, 6:00PM)
      Now you have 7 tasks in the list.
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Got it. I've added this task:
-      E | 0 | team project | Aug 17 2025 - Aug 25 2025, 6:00PM
+      [E][ ] team project (from: Aug 17 2025 to: Aug 25 2025, 6:00PM)
      Now you have 8 tasks in the list.
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Here are the tasks in your list: 
-     1. T | 1 | read book
-     2. D | 1 | return book | June 6th
-     3. E | 0 | project meeting | Aug 6th 2 - 4pm
-     4. T | 0 | join sports club
-     5. D | 0 | return book | Sunday
-     6. D | 0 | return book | Aug 2 2019, 8:00AM
-     7. D | 0 | return book | Dec 2 2019, 6:00PM
-     8. E | 0 | team project | Aug 17 2025 - Aug 25 2025, 6:00PM
+     1. [T][X] read book
+     2. [D][X] return book (by: June 6th)
+     3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+     4. [T][ ] join sports club
+     5. [D][ ] return book (by: Sunday)
+     6. [D][ ] return book (by: Aug 2 2019, 8:00AM)
+     7. [D][ ] return book (by: Dec 2 2019, 6:00PM)
+     8. [E][ ] team project (from: Aug 17 2025 to: Aug 25 2025, 6:00PM)
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________
      Here are the matching tasks in your list: 
-     1. T | 1 | read book
-     2. D | 1 | return book | June 6th
-     3. D | 0 | return book | Sunday
-     4. D | 0 | return book | Aug 2 2019, 8:00AM
-     5. D | 0 | return book | Dec 2 2019, 6:00PM
+     1. [T][X] read book
+     2. [D][X] return book (by: June 6th)
+     3. [D][ ] return book (by: Sunday)
+     4. [D][ ] return book (by: Aug 2 2019, 8:00AM)
+     5. [D][ ] return book (by: Dec 2 2019, 6:00PM)
     ____________________________________________________________________________________________________
 
     ____________________________________________________________________________________________________

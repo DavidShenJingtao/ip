@@ -21,7 +21,7 @@ public class UnmarkCommand extends Command {
         super();
         this.command = command;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DavidException {
         String[] strarr = this.command.split(" ");

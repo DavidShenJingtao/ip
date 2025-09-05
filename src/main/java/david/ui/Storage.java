@@ -50,7 +50,7 @@ public class Storage {
             ArrayList<Task> list = tasks.getList();
             FileWriter fw = new FileWriter(path.toFile(), false);
             for (Task t : list) {
-                fw.write(t.toString() + System.lineSeparator());
+                fw.write(t.serialize() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {

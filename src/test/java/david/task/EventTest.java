@@ -10,8 +10,8 @@ public class EventTest {
         Event test1 = new Event("test1", "Mon 2pm", "4pm");
         Event test2 = new Event("test2", "2025-08-17",
                                                             "2025-08-25 1800");
-        assertEquals("E | 0 | test1 | Mon 2pm - 4pm", test1.toString());
-        assertEquals("E | 0 | test2 | Aug 17 2025 - Aug 25 2025, 6:00PM",
+        assertEquals("[E][ ] test1 (from: Mon 2pm to: 4pm)", test1.toString());
+        assertEquals("[E][ ] test2 (from: Aug 17 2025 to: Aug 25 2025, 6:00PM)",
                                                                         test2.toString());
     }
 
@@ -20,10 +20,10 @@ public class EventTest {
         Event test2 = new Event("test2", "2025-08-17",
                 "2025-08-25 1800");
         test2.markAsDone();
-        assertEquals("E | 1 | test2 | Aug 17 2025 - Aug 25 2025, 6:00PM",
+        assertEquals("[E][X] test2 (from: Aug 17 2025 to: Aug 25 2025, 6:00PM)",
                                                                         test2.toString());
         test2.markAsUndone();
-        assertEquals("E | 0 | test2 | Aug 17 2025 - Aug 25 2025, 6:00PM",
+        assertEquals("[E][ ] test2 (from: Aug 17 2025 to: Aug 25 2025, 6:00PM)",
                                                                         test2.toString());
     }
 }
