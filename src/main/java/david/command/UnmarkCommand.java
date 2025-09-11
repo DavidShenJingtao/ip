@@ -24,38 +24,42 @@ public class UnmarkCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DavidException {
-        String[] strarr = this.command.split(" ");
-        if (strarr.length <= 1 || strarr.length > 2 || !isInteger(strarr[1])) {
+        String[] strArr = this.command.split(" ");
+        if (strArr.length != 2 || !isInteger(strArr[1])) {
             throw new NumberException("the value you entered after unmark");
         }
-        int index = Integer.valueOf(strarr[1]) - 1;
+        int index = Integer.parseInt(strArr[1]) - 1;
         if (index < 0 || index > tasks.size() - 1) {
             throw new IndexException("the value you entered after unmark");
         }
-        Task t = tasks.get(index);
-        t.markAsUndone();
-        storage.save(tasks);
-
-        String msg = "OK, I've marked this task as not done yet:\n  " + t;
-        ui.showMessage(msg);
+        Task t = performUnmark(tasks, storage, index);
+        ui.showMessage(buildMessage(t));
     }
 
     @Override
     public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DavidException {
-        String[] strarr = this.command.split(" ");
-        if (strarr.length <= 1 || strarr.length > 2 || !isInteger(strarr[1])) {
+        String[] strArr = this.command.split(" ");
+        if (strArr.length != 2 || !isInteger(strArr[1])) {
             throw new NumberException("the value you entered after unmark");
         }
-        int index = Integer.valueOf(strarr[1]) - 1;
+        int index = Integer.parseInt(strArr[1]) - 1;
         if (index < 0 || index > tasks.size() - 1) {
             throw new IndexException("the value you entered after unmark");
         }
+        Task t = performUnmark(tasks, storage, index);
+        return buildMessage(t);
+    }
+
+    private Task performUnmark(TaskList tasks, Storage storage, int index)
+            throws DavidException {
         Task t = tasks.get(index);
         t.markAsUndone();
         storage.save(tasks);
+        return t;
+    }
 
-        String msg = "OK, I've marked this task as not done yet:\n  " + t;
-        return msg;
+    private String buildMessage(Task t) {
+        return "OK, I've marked this task as not done yet:\n  " + t;
     }
 
     private static boolean isInteger(String s) {
