@@ -32,12 +32,8 @@ public class MarkCommand extends Command {
         if (index < 0 || index > tasks.size() - 1) {
             throw new IndexException("the value you entered after mark");
         }
-        Task t = tasks.get(index);
-        t.markAsDone();
-        storage.save(tasks);
-
-        String msg = "Nice! I've mark this task as done:\n  " + t;
-        ui.showMessage(msg);
+        Task t = performMark(tasks, storage, index);
+        ui.showMessage(buildMessage(t));
     }
 
     @Override
@@ -50,12 +46,20 @@ public class MarkCommand extends Command {
         if (index < 0 || index > tasks.size() - 1) {
             throw new IndexException("the value you entered after mark");
         }
+        Task t = performMark(tasks, storage, index);
+        return buildMessage(t);
+    }
+
+    private Task performMark(TaskList tasks, Storage storage, int index)
+                                                        throws DavidException {
         Task t = tasks.get(index);
         t.markAsDone();
         storage.save(tasks);
+        return t;
+    }
 
-        String msg = "Nice! I've mark this task as done:\n  " + t;
-        return msg;
+    private String buildMessage(Task t) {
+        return "Nice! I've mark this task as done:\n  " + t;
     }
 
     private static boolean isInteger(String s) {
