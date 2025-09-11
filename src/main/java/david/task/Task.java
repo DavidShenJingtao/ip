@@ -59,20 +59,21 @@ public class Task {
      * @throws DavidException If parsing the task fails.
      */
     public static Task of(String s) throws DavidException {
-        String[] strarr = s.split(" ", 2);
-        TaskType type = TaskType.of(strarr[0]);
-        if (strarr.length <= 1) {
-            throw new EmptyDescriptionException(strarr[0]);
+        String[] strArr = s.split(" ", 2);
+        assert strArr.length > 0 : "String array should never be empty";
+        TaskType type = TaskType.of(strArr[0]);
+        if (strArr.length <= 1) {
+            throw new EmptyDescriptionException(strArr[0]);
         }
 
         String description;
         switch (type) {
         case TODO:
-            description = strarr[1];
+            description = strArr[1];
             return new ToDo(description);
 
         case DEADLINE:
-            String[] by = strarr[1].split(" /by ", 2);
+            String[] by = strArr[1].split(" /by ", 2);
             if (by.length < 2) {
                 String m = "the command format of deadline should be: "
                         + "deadline [task name] /by [time].";
@@ -85,7 +86,7 @@ public class Task {
         case EVENT:
             String m = "the command format of event should be: "
                     + "event [task name] /from [start time] /to [end time].";
-            String[] from = strarr[1].split(" /from ", 2);
+            String[] from = strArr[1].split(" /from ", 2);
             if (from.length < 2) {
                 throw new FormatException(m);
             }
@@ -99,7 +100,7 @@ public class Task {
             return new Event(description, startTime, endTime);
 
         default:
-            throw new InvalidTypeException(strarr[0]);
+            throw new InvalidTypeException(strArr[0]);
         }
     }
 
@@ -111,17 +112,18 @@ public class Task {
      * @throws DavidException If parsing the task fails.
      */
     public static Task create(String line) throws DavidException {
-        String[] strarr = line.split("\\s*\\|\\s*");
-        String type = strarr[0];
+        String[] strArr = line.split("\\s*\\|\\s*");
+        assert strArr.length > 0 : "String array should never be empty";
+        String type = strArr[0];
         if (!type.equals("T") && !type.equals("D") && !type.equals("E")) {
             throw new InvalidTypeException(type);
         }
         String status = "wrong status format (1 for done, 0 for undone) in the input line.";
-        if (strarr.length <= 1 || (!strarr[1].equals("0") && !strarr[1].equals("1"))) {
+        if (strArr.length <= 1 || (!strArr[1].equals("0") && !strArr[1].equals("1"))) {
             throw new FormatException(status);
         }
 
-        boolean flag = strarr[1].equals("1"); //true if is done
+        boolean flag = strArr[1].equals("1"); //true if is done
         String description;
         Task task;
         String todo = "the input format of todo should be: T | 0/1 | [description].";
@@ -132,10 +134,10 @@ public class Task {
 
         switch (type) {
         case "T":
-            if (strarr.length <= 2) {
+            if (strArr.length <= 2) {
                 throw new FormatException(todo);
             }
-            description = strarr[2];
+            description = strArr[2];
             task = new ToDo(description);
             if (flag) {
                 task.markAsDone();
@@ -143,11 +145,11 @@ public class Task {
             return task;
 
         case "D":
-            if (strarr.length <= 3) {
+            if (strArr.length <= 3) {
                 throw new FormatException(ddl);
             }
-            description = strarr[2];
-            String by = strarr[3];
+            description = strArr[2];
+            String by = strArr[3];
             task = new Deadline(description, by);
             if (flag) {
                 task.markAsDone();
@@ -155,11 +157,11 @@ public class Task {
             return task;
 
         case "E":
-            if (strarr.length <= 3) {
+            if (strArr.length <= 3) {
                 throw new FormatException(event);
             }
-            description = strarr[2];
-            String[] timeParts = strarr[3].split("\\s*-\\s*");
+            description = strArr[2];
+            String[] timeParts = strArr[3].split("\\s*-\\s*");
             if (timeParts.length != 2) {
                 throw new FormatException(event);
             }

@@ -38,6 +38,7 @@ public class TaskList {
      * @param index Index of the task to be deleted.
      */
     public void delete(int index) {
+        assert index >= 0 && index < size() : "Index must be within bound";
         this.list.remove(index);
     }
 
@@ -96,6 +97,7 @@ public class TaskList {
      * @return The desired task.
      */
     public Task get(int index) {
+        assert index >= 0 && index < size() : "Index must be within bound";
         return list.get(index);
     }
 
