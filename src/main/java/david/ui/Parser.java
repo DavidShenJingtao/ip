@@ -21,8 +21,8 @@ public class Parser {
      * @throws DavidException If parsing the string fails.
      */
     public static Command parse(String command) throws DavidException {
-        String[] strarr = command.split(" ", 2);
-        String op = strarr[0];
+        String[] strArr = command.split(" ", 2);
+        String op = strArr[0];
 
         switch (op) {
         case "bye":
