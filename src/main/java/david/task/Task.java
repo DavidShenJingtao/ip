@@ -60,6 +60,7 @@ public class Task {
      */
     public static Task of(String s) throws DavidException {
         String[] strArr = s.split(" ", 2);
+        assert strArr.length > 0 : "String array should never be empty";
         TaskType type = TaskType.of(strArr[0]);
         if (strArr.length <= 1) {
             throw new EmptyDescriptionException(strArr[0]);
@@ -112,6 +113,7 @@ public class Task {
      */
     public static Task create(String line) throws DavidException {
         String[] strArr = line.split("\\s*\\|\\s*");
+        assert strArr.length > 0 : "String array should never be empty";
         String type = strArr[0];
         if (!type.equals("T") && !type.equals("D") && !type.equals("E")) {
             throw new InvalidTypeException(type);

@@ -22,6 +22,7 @@ public class Parser {
      */
     public static Command parse(String command) throws DavidException {
         String[] strArr = command.split(" ", 2);
+        assert strArr.length > 0 : "String array should never be empty";
         String op = strArr[0];
 
         switch (op) {
