@@ -10,7 +10,7 @@ import java.util.Locale;
  * A task that has starting time and ending time.
  */
 public class Event extends Task {
-    private static final String type = "E";
+    private static final String TYPE = "E";
     private String from;
     private String to;
 
@@ -106,13 +106,13 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (from: %s to: %s)", type,
+        return String.format("[%s]%s (from: %s to: %s)", TYPE,
                 super.toString(), printFromDate(), printToDate());
     }
 
     @Override
     public String serialize() {
-        return String.format("%s | %s | %s - %s", type,
+        return String.format("%s | %s | %s - %s", TYPE,
                 super.serialize(), printFromDate(), printToDate());
     }
 }

@@ -10,7 +10,7 @@ import java.util.Locale;
  * A task that has deadline.
  */
 public class Deadline extends Task {
-    private static final String type = "D";
+    private static final String TYPE = "D";
     private String by;
     private boolean hasTime;
     private boolean isValidDate;
@@ -59,13 +59,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", type,
+        return String.format("[%s]%s (by: %s)", TYPE,
                 super.toString(), printDate());
     }
 
     @Override
     public String serialize() {
-        return String.format("%s | %s | %s", type,
+        return String.format("%s | %s | %s", TYPE,
                 super.serialize(), printDate());
     }
 }

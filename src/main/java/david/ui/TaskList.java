@@ -56,7 +56,7 @@ public class TaskList {
     /**
      * Executes list command from GUI.
      *
-     * @return the string representation of all tasks from the list.
+     * @return The string representation of all tasks from the list.
      */
     public String printListString() {
         String res = "\n Here are the tasks in your list: ";
@@ -81,7 +81,11 @@ public class TaskList {
         System.out.println();
     }
 
-
+    /**
+     * Executes find command from GUI.
+     *
+     * @return The string representation of all matching tasks from the find command.
+     */
     public String printMatchListString() {
         String res = "\n Here are the matching tasks in your list: ";
         for (int i = 0; i < list.size(); i++) {

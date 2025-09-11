@@ -4,7 +4,7 @@ package david.task;
  * A simple task that has no time attributes.
  */
 public class ToDo extends Task {
-    private static final String type = "T";
+    private static final String TYPE = "T";
 
     /**
      * @param description Description of the task todo.
@@ -15,11 +15,11 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s", type, super.toString());
+        return String.format("[%s]%s", TYPE, super.toString());
     }
 
     @Override
     public String serialize() {
-        return String.format("%s | %s", type, super.serialize());
+        return String.format("%s | %s", TYPE, super.serialize());
     }
 }

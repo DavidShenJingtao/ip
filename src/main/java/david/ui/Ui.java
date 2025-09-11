@@ -56,7 +56,7 @@ public class Ui {
     /**
      * Prints the formatted message.
      *
-     * @param msg The message to be formatted.
+     * @param msg The messages to be formatted.
      */
     public void showMessage(String msg) {
         System.out.println(Formatter.format(msg));
