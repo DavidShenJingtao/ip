@@ -1,6 +1,8 @@
 package david.ui;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import david.task.Task;
 
@@ -43,13 +45,7 @@ public class TaskList {
      * Prints the string representation of all tasks from the list.
      */
     public void printList() {
-        String start = Formatter.NEWLINE + "\n Here are the tasks in your list: ";
-        System.out.print(start.indent(4));
-        for (int i = 0; i < list.size(); i++) {
-            String msg = String.format(" %d. %s", i + 1, list.get(i));
-            System.out.print(msg.indent(4));
-        }
-        System.out.print(Formatter.NEWLINE.indent(4));
+        System.out.print(buildString("\n Here are the tasks in your list: ").indent(4));
         System.out.println();
     }
 
@@ -59,25 +55,15 @@ public class TaskList {
      * @return The string representation of all tasks from the list.
      */
     public String printListString() {
-        String res = "\n Here are the tasks in your list: ";
-        for (int i = 0; i < list.size(); i++) {
-            String msg = String.format("\n %d. %s", i + 1, list.get(i));
-            res += msg;
-        }
-        return res;
+        return buildStringGui("\n Here are the tasks in your list: ");
     }
 
     /**
      * Prints the string representation of all matching tasks from the find command.
      */
     public void printMatchList() {
-        String start = Formatter.NEWLINE + "\n Here are the matching tasks in your list: ";
-        System.out.print(start.indent(4));
-        for (int i = 0; i < list.size(); i++) {
-            String msg = String.format(" %d. %s", i + 1, list.get(i));
-            System.out.print(msg.indent(4));
-        }
-        System.out.print(Formatter.NEWLINE.indent(4));
+        System.out.print(buildString("\n Here are the matching tasks in your list: ")
+                                                                                    .indent(4));
         System.out.println();
     }
 
@@ -87,12 +73,20 @@ public class TaskList {
      * @return The string representation of all matching tasks from the find command.
      */
     public String printMatchListString() {
-        String res = "\n Here are the matching tasks in your list: ";
-        for (int i = 0; i < list.size(); i++) {
-            String msg = String.format("\n %d. %s", i + 1, list.get(i));
-            res += msg;
-        }
-        return res;
+        return buildStringGui("\n Here are the matching tasks in your list: ");
+    }
+
+    private String buildString(String header) {
+        String tasks = IntStream.range(0, list.size())
+                .mapToObj(i -> String.format(" %d. %s", i + 1, list.get(i)))
+                .collect(Collectors.joining("\n"));
+        return Formatter.NEWLINE + header + "\n" + tasks + "\n" + Formatter.NEWLINE;
+    }
+
+    private String buildStringGui(String header) {
+        return header + IntStream.range(0, list.size())
+                .mapToObj(i -> String.format("\n %d. %s", i + 1, list.get(i)))
+                .reduce("", String::concat);
     }
 
     /**
