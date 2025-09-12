@@ -8,7 +8,7 @@ import david.exception.InvalidTypeException;
 /**
  * A parent class for all tasks.
  */
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -35,6 +35,10 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**
@@ -184,7 +188,15 @@ public class Task {
         return String.format("[%s] %s", this.getDoneString(), this.description);
     }
 
+    /**
+     * @return Input format of the task.
+     */
     public String serialize() {
         return String.format("%d | %s", this.getDone(), this.description);
     }
+
+    /**
+     * @return The copy of the task.
+     */
+    public abstract Task copy();
 }

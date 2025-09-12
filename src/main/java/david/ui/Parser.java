@@ -7,6 +7,7 @@ import david.command.ExitCommand;
 import david.command.FindCommand;
 import david.command.ListCommand;
 import david.command.MarkCommand;
+import david.command.UndoCommand;
 import david.command.UnmarkCommand;
 import david.exception.DavidException;
 
@@ -31,6 +32,9 @@ public class Parser {
 
         case "list":
             return new ListCommand();
+
+        case "undo":
+            return new UndoCommand();
 
         case "mark":
             return new MarkCommand(command);

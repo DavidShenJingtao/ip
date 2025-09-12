@@ -68,4 +68,13 @@ public class Deadline extends Task {
         return String.format("%s | %s | %s", TYPE,
                 super.serialize(), printDate());
     }
+
+    @Override
+    public Task copy() {
+        Task t = new Deadline(this.getDescription(), this.by);
+        if (this.getIsDone()) {
+            t.markAsDone();
+        }
+        return t;
+    }
 }

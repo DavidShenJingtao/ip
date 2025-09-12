@@ -115,4 +115,13 @@ public class Event extends Task {
         return String.format("%s | %s | %s - %s", TYPE,
                 super.serialize(), printFromDate(), printToDate());
     }
+
+    @Override
+    public Task copy() {
+        Task t = new Event(this.getDescription(), this.from, this.to);
+        if (this.getIsDone()) {
+            t.markAsDone();
+        }
+        return t;
+    }
 }

@@ -1,6 +1,8 @@
 package david.ui;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,6 +13,7 @@ import david.task.Task;
  */
 public class TaskList {
     private ArrayList<Task> list;
+    private Deque<ArrayList<Task>> history = new ArrayDeque<>();
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -24,11 +27,23 @@ public class TaskList {
     }
 
     /**
+     * Save the deep copy of tasklist into a deque.
+     */
+    public void saveState() {
+        ArrayList<Task> snapshot = new ArrayList<>();
+        for (Task t : list) {
+            snapshot.add(t.copy());
+        }
+        history.push(snapshot);
+    }
+
+    /**
      * Add new tasks to the list.
      *
      * @param t A task to be added.
      */
     public void add(Task t) {
+        saveState();
         this.list.add(t);
     }
 
@@ -39,6 +54,7 @@ public class TaskList {
      */
     public void delete(int index) {
         assert index >= 0 && index < size() : "Index must be within bound";
+        saveState();
         this.list.remove(index);
     }
 
@@ -110,5 +126,16 @@ public class TaskList {
      */
     public int size() {
         return list.size();
+    }
+
+    /**
+     * @return True if undo command is successful.
+     */
+    public boolean undo() {
+        if (history.isEmpty()) {
+            return false;
+        }
+        this.list = history.pop();
+        return true;
     }
 }

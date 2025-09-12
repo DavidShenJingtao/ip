@@ -52,6 +52,7 @@ public class MarkCommand extends Command {
 
     private Task performMark(TaskList tasks, Storage storage, int index)
                                                         throws DavidException {
+        tasks.saveState();
         Task t = tasks.get(index);
         t.markAsDone();
         storage.save(tasks);

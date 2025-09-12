@@ -52,6 +52,7 @@ public class UnmarkCommand extends Command {
 
     private Task performUnmark(TaskList tasks, Storage storage, int index)
             throws DavidException {
+        tasks.saveState();
         Task t = tasks.get(index);
         t.markAsUndone();
         storage.save(tasks);

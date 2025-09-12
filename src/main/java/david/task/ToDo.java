@@ -22,4 +22,13 @@ public class ToDo extends Task {
     public String serialize() {
         return String.format("%s | %s", TYPE, super.serialize());
     }
+
+    @Override
+    public Task copy() {
+        Task t = new ToDo(this.getDescription());
+        if (this.getIsDone()) {
+            t.markAsDone();
+        }
+        return t;
+    }
 }
