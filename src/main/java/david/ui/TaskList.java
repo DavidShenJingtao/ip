@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Save the deep copy of tasklist into a deque.
+     * Saves the deep copy of tasklist into a deque.
      */
     public void saveState() {
         ArrayList<Task> snapshot = new ArrayList<>();
@@ -38,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Add new tasks to the list.
+     * Adds new tasks to the list.
      *
      * @param t A task to be added.
      */
@@ -48,7 +48,7 @@ public class TaskList {
     }
 
     /**
-     * Delete tasks from the list.
+     * Deletes tasks from the list.
      *
      * @param index Index of the task to be deleted.
      */

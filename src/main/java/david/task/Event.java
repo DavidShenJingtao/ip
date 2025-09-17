@@ -14,12 +14,12 @@ public class Event extends Task {
     private String from;
     private String to;
 
-    private boolean fromHasTime;
-    private boolean fromIsValidDate;
+    private boolean hasFromTime;
+    private boolean isFromValidDate;
     private LocalDate fromDate;
     private LocalDateTime fromDateTime;
-    private boolean toHasTime;
-    private boolean toIsValidDate;
+    private boolean hasToTime;
+    private boolean isToValidDate;
     private LocalDate toDate;
     private LocalDateTime toDateTime;
 
@@ -40,18 +40,18 @@ public class Event extends Task {
         try {
             if (this.from.contains(" ")) { //time?
                 DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                this.fromHasTime = true;
-                this.fromIsValidDate = true;
+                this.hasFromTime = true;
+                this.isFromValidDate = true;
                 this.fromDateTime = LocalDateTime.parse(this.from, dtFormatter);
             } else {
                 DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                this.fromHasTime = false;
-                this.fromIsValidDate = true;
+                this.hasFromTime = false;
+                this.isFromValidDate = true;
                 this.fromDate = LocalDate.parse(this.from, dtFormatter);
             }
         } catch (DateTimeParseException e) {
-            this.fromHasTime = false;
-            this.fromIsValidDate = false;
+            this.hasFromTime = false;
+            this.isFromValidDate = false;
         }
     }
 
@@ -59,26 +59,26 @@ public class Event extends Task {
         try {
             if (this.to.contains(" ")) { //time?
                 DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                this.toHasTime = true;
-                this.toIsValidDate = true;
+                this.hasToTime = true;
+                this.isToValidDate = true;
                 this.toDateTime = LocalDateTime.parse(this.to, dtFormatter);
             } else {
                 DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                this.toHasTime = false;
-                this.toIsValidDate = true;
+                this.hasToTime = false;
+                this.isToValidDate = true;
                 this.toDate = LocalDate.parse(this.to, dtFormatter);
             }
         } catch (DateTimeParseException e) {
-            this.toHasTime = false;
-            this.toIsValidDate = false;
+            this.hasToTime = false;
+            this.isToValidDate = false;
         }
     }
 
     private String printFromDate() {
-        if (!fromIsValidDate) {
+        if (!isFromValidDate) {
             return this.from;
         }
-        if (fromHasTime) {
+        if (hasFromTime) {
             DateTimeFormatter outputFormatter =
                     DateTimeFormatter.ofPattern("MMM d yyyy, h:mma", Locale.ENGLISH);
             return fromDateTime.format(outputFormatter);
@@ -90,10 +90,10 @@ public class Event extends Task {
     }
 
     private String printToDate() {
-        if (!toIsValidDate) {
+        if (!isToValidDate) {
             return this.to;
         }
-        if (toHasTime) {
+        if (hasToTime) {
             DateTimeFormatter outputFormatter =
                     DateTimeFormatter.ofPattern("MMM d yyyy, h:mma", Locale.ENGLISH);
             return toDateTime.format(outputFormatter);
