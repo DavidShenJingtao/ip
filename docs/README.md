@@ -1,6 +1,6 @@
 # User Guide: Getting Start With David!
 
-//screenshot
+![screenshot.png](../../screenshot.png)
 
 ## Introduction
 David is a chatbot that keeps track of your tasks. It's:
