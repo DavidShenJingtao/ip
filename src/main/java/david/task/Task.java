@@ -66,46 +66,60 @@ public abstract class Task {
         String[] strArr = s.split(" ", 2);
         assert strArr.length > 0 : "String array should never be empty";
         TaskType type = TaskType.of(strArr[0]);
-        if (strArr.length <= 1) {
-            throw new EmptyDescriptionException(strArr[0]);
-        }
+        validatePresence(strArr);
 
-        String description;
         switch (type) {
         case TODO:
-            description = strArr[1];
-            return new ToDo(description);
+            return createToDo(strArr[1]);
 
         case DEADLINE:
-            String[] by = strArr[1].split(" /by ", 2);
-            if (by.length < 2) {
-                String m = "the command format of deadline should be: "
-                        + "deadline [task name] /by [time].";
-                throw new FormatException(m);
-            }
-            description = by[0];
-            String end = by[1];
-            return new Deadline(description, end);
+            return createDeadline(strArr[1]);
 
         case EVENT:
-            String m = "the command format of event should be: "
-                    + "event [task name] /from [start time] /to [end time].";
-            String[] from = strArr[1].split(" /from ", 2);
-            if (from.length < 2) {
-                throw new FormatException(m);
-            }
-            String[] to = from[1].split(" /to ", 2);
-            if (to.length < 2) {
-                throw new FormatException(m);
-            }
-            description = from[0];
-            String startTime = to[0];
-            String endTime = to[1];
-            return new Event(description, startTime, endTime);
+            return createEvent(strArr[1]);
 
         default:
             throw new InvalidTypeException(strArr[0]);
         }
+    }
+
+    private static void validatePresence(String[] strArr) throws EmptyDescriptionException {
+        if (strArr.length <= 1) {
+            throw new EmptyDescriptionException(strArr[0]);
+        }
+    }
+
+    private static Task createToDo(String description) {
+        return new ToDo(description);
+    }
+
+    private static Task createDeadline(String input) throws FormatException {
+        String[] by = input.split(" /by ", 2);
+        if (by.length < 2) {
+            String m = "the command format of deadline should be: "
+                    + "deadline [task name] /by [time].";
+            throw new FormatException(m);
+        }
+        String description = by[0];
+        String end = by[1];
+        return new Deadline(description, end);
+    }
+
+    private static Task createEvent(String input) throws FormatException {
+        String m = "the command format of event should be: "
+                + "event [task name] /from [start time] /to [end time].";
+        String[] from = input.split(" /from ", 2);
+        if (from.length < 2) {
+            throw new FormatException(m);
+        }
+        String[] to = from[1].split(" /to ", 2);
+        if (to.length < 2) {
+            throw new FormatException(m);
+        }
+        String description = from[0];
+        String startTime = to[0];
+        String endTime = to[1];
+        return new Event(description, startTime, endTime);
     }
 
     /**
@@ -119,69 +133,88 @@ public abstract class Task {
         String[] strArr = line.split("\\s*\\|\\s*");
         assert strArr.length > 0 : "String array should never be empty";
         String type = strArr[0];
-        if (!type.equals("T") && !type.equals("D") && !type.equals("E")) {
-            throw new InvalidTypeException(type);
-        }
-        String status = "wrong status format (1 for done, 0 for undone) in the input line.";
-        if (strArr.length <= 1 || (!strArr[1].equals("0") && !strArr[1].equals("1"))) {
-            throw new FormatException(status);
-        }
-
+        validateType(type);
+        validateStatus(strArr);
         boolean flag = strArr[1].equals("1"); //true if is done
-        String description;
-        Task task;
-        String todo = "the input format of todo should be: T | 0/1 | [description].";
-        String ddl = "the input format of deadline should be: "
-                + "D | 0/1 | [description] | [end time].";
-        String event = "the input format for event should be: "
-                + "E | 0/1 | [description] | [start time] - [end time].";
 
         switch (type) {
         case "T":
-            if (strArr.length <= 2) {
-                throw new FormatException(todo);
-            }
-            description = strArr[2];
-            task = new ToDo(description);
-            if (flag) {
-                task.markAsDone();
-            }
-            return task;
+            return createToDoFromFile(strArr, flag);
 
         case "D":
-            if (strArr.length <= 3) {
-                throw new FormatException(ddl);
-            }
-            description = strArr[2];
-            String by = strArr[3];
-            task = new Deadline(description, by);
-            if (flag) {
-                task.markAsDone();
-            }
-            return task;
+            return createDeadlineFromFile(strArr, flag);
 
         case "E":
-            if (strArr.length <= 3) {
-                throw new FormatException(event);
-            }
-            description = strArr[2];
-            String[] timeParts = strArr[3].split("\\s*-\\s*");
-            if (timeParts.length != 2) {
-                throw new FormatException(event);
-            }
-            String from = timeParts[0];
-            String to = timeParts[1];
-            task = new Event(description, from, to);
-            if (flag) {
-                task.markAsDone();
-            }
-            return task;
+            return createEventFromFile(strArr, flag);
 
         default:
             throw new InvalidTypeException(type);
         }
     }
 
+    private static void validateType(String type) throws InvalidTypeException {
+        if (!type.equals("T") && !type.equals("D") && !type.equals("E")) {
+            throw new InvalidTypeException(type);
+        }
+    }
+
+    private static void validateStatus(String[] strArr) throws FormatException {
+        String status = "wrong status format (1 for done, 0 for undone) in the input line.";
+        if (strArr.length <= 1 || (!strArr[1].equals("0") && !strArr[1].equals("1"))) {
+            throw new FormatException(status);
+        }
+    }
+
+    private static Task createToDoFromFile(String[] strArr, boolean flag)
+                                                            throws FormatException {
+        String todo = "the input format of todo should be: T | 0/1 | [description].";
+        if (strArr.length <= 2) {
+            throw new FormatException(todo);
+        }
+        String description = strArr[2];
+        Task task = new ToDo(description);
+        if (flag) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
+    private static Task createDeadlineFromFile(String[] strArr, boolean flag)
+                                                            throws FormatException {
+        String ddl = "the input format of deadline should be: "
+                + "D | 0/1 | [description] | [end time].";
+        if (strArr.length <= 3) {
+            throw new FormatException(ddl);
+        }
+        String description = strArr[2];
+        String by = strArr[3];
+        Task task = new Deadline(description, by);
+        if (flag) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
+    private static Task createEventFromFile(String[] strArr, boolean flag)
+                                                            throws FormatException {
+        String event = "the input format for event should be: "
+                + "E | 0/1 | [description] | [start time] - [end time].";
+        if (strArr.length <= 3) {
+            throw new FormatException(event);
+        }
+        String description = strArr[2];
+        String[] timeParts = strArr[3].split("\\s*-\\s*");
+        if (timeParts.length != 2) {
+            throw new FormatException(event);
+        }
+        String from = timeParts[0];
+        String to = timeParts[1];
+        Task task = new Event(description, from, to);
+        if (flag) {
+            task.markAsDone();
+        }
+        return task;
+    }
 
     @Override
     public String toString() {
