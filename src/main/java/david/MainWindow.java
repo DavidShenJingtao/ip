@@ -35,6 +35,10 @@ public class MainWindow extends AnchorPane {
     /** Injects the David instance */
     public void setDavid(David d) {
         david = d;
+        String welcome = "Hello! I'm David.\nWhat can I do for you?";
+        dialogContainer.getChildren().add(
+                DialogBox.getDavidDialog(welcome, davidImage)
+        );
     }
 
     /**
