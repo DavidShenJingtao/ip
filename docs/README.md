@@ -1,14 +1,33 @@
 # User Guide: Getting Start With David!
 
-![screenshot.png](../../screenshot.png)
-
-## Introduction
-David is a chatbot that keeps track of your tasks. It's:
+David is a chatbot that **keeps track of your tasks**. It's:
 1. executed in the conversational platform
 2. able to perform in both GUI and command window
 3. able to handle tasks like **"to do"**, **"deadline"**, **"event"**
 4. able to parse time of deadline and event tasks in a specified format
 5. durable in storing the tasks after the execution
+
+- [Layout](#layout)
+- [Quick start](#quick-start)
+- [How to read the storage file?](#how-to-read-the-storage-file)
+- [How to read the output of David?](#how-to-read-the-output-of-david)
+- [How to use the commands?](#how-to-use-the-commands)
+  - [Add Command](#1-add-command)
+  - [Mark Command](#2-mark-command)
+  - [List Command](#3-list-command)
+  - [Delete Command](#4-delete-command)
+  - [Find Command](#5-find-command)
+  - [Undo Command](#6-undo-command)
+  - [Exit Command](#7-exit-command)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
+
+## Layout
+![Ui.png](Ui.png)
+
+## Quick start
+
 
 ## How to read the storage file?
 The storage file is located in ***root/data/David.txt***.
@@ -307,3 +326,9 @@ Expected outcome:
      Bye. Hope to see you again soon!
     ____________________________________________________________________________________________________
 ```
+
+## FAQ
+
+## Known issues
+
+## Command summary
