@@ -27,7 +27,12 @@ David is a chatbot that **keeps track of your tasks**. It's:
 ![Ui.png](Ui.png)
 
 ## Quick start
-
+1. Ensure you have *Java 17* installed in your computer. 
+For Mac users, ensure you have the correct JDK version stated in [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+2. Download `david.jar` file from [here](https://github.com/DavidShenJingtao/ip/releases/tag/v0.2). 
+If you want to view the code, also download the source code provided.
+3. Run the command `java -jar david.jar`.
+4. Add tasks to your list! ☺️
 
 ## How to read the storage file?
 The storage file is located in ***root/data/David.txt***.
@@ -77,8 +82,7 @@ For example, `[D][ ] return book (by: Dec 2 2019, 6:00PM)
 For task type "Event",
 the output format should be `[E][ ] description (from: start time to: end time)`. 
 Similar for the second box.
-For example, `[E][ ] team project (from: Aug 17 2025 to: Aug 25 2025, 6:00PM)
-`.
+For example, `[E][ ] team project (from: Aug 17 2025 to: Aug 25 2025, 6:00PM)`.
 
 
 ## How to use the commands?
@@ -205,7 +209,7 @@ A new line will be added to the storage file:
 ```Error: the type (first word) you entered is invalid.```
 
 ### 2. Mark Command
-### 2.1 `mark index`
+### 2.1 `mark [index]`
 Mark the task corresponding to the index (1-based) in the list as done.
 First, the index should be a valid integer, 
 otherwise the error message will be printed:
@@ -213,7 +217,7 @@ otherwise the error message will be printed:
 
 Second, index should be within the bound of list, 
 otherwise the error message will be printed:
-`Error: the value you entered after mark is out of bound.`
+```Error: the value you entered after mark is out of bound.```
 
 Example of usage:
 - `mark 2`
@@ -221,16 +225,16 @@ Example of usage:
 Expected outcome:
 ```
     ____________________________________________________________________________________________________
-     Nice! I've mark this task as done:
+     Nice! I've marked this task as done:
       [D][X] return book (by: June 6th)
     ____________________________________________________________________________________________________
 ```
 For the second line of the input file,
 the second field will be written to "1".
 
-### 2.2 `unmark index`
+### 2.2 `unmark [index]`
 Mark the task corresponding to the index (1-based) in the list as undone.
-Usage is similar to `mark index`. For the corresponding line of the input file,
+Usage is similar to `mark [index]`. For the corresponding line of the input file,
 the second field will be written to "0".
 
 Example of usage:
@@ -260,9 +264,9 @@ Expected outcome:
 ```
 
 ### 4. Delete Command
-### `delete index`
+### `delete [index]`
 Delete the task corresponding to the index (1-based) in the list.
-Usage similar to `mark index`.
+Usage similar to `mark [index]`.
 
 Example of usage:
 - `delete 2`
@@ -278,7 +282,7 @@ Expected outcome:
 The second line of the input file will be deleted.
 
 ### 5. Find Command
-### `find keyword`
+### `find [keyword]`
 Prints the list of tasks whose task description matches the keyword.
 If the keyword is a substring of the description, it will also match.
 
@@ -328,7 +332,39 @@ Expected outcome:
 ```
 
 ## FAQ
+### Q1: Where are the data file stored?
+It is stored in `root/data/David.txt`. You can back up and/or move this file to transfer data.
+
+### Q2: How do I transfer my data to another computer?
+Copy the input data file `David.txt` from the old install location, download the file in the other computer, 
+overwrite the empty data file it creates with the copied old data file.
+
+### Q3: What happens if the data file is corrupt or manually edited incorrectly?
+If the file format is invalid, the program will discard the corrupted input lines, and they won't be shown 
+in the list. However, the corrupted lines are still retained in the input file, so you should delete them manually.
 
 ## Known issues
+### 1. Corrupted input file
+If the input format is invalid, the program will print error message at the start.
+The remedy is to delete the corrupted input lines accordingly, but the main disadvantage of 
+the logging is that it doesn't show which lines have invalid format.
+
+### 2. No validation of date & time format
+The program will parse date & time with a desired format, but fails to parse the date & time in other formats.
+That means if the date & time format is invalid and can't be parsed, the program will still record it to the list.
+The remedy is to follow the format `yyyy-MM-dd (HHmm)` stated in the user guide strictly, future release may involve 
+date & time format validation.
 
 ## Command summary
+| Command | Format                                                  | Examples                                                                                                                 |
+| --- |---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Add ToDo | `todo [description]`                                    | `todo review lectures`                                                                                                   |
+| Add Deadline | `deadline [description] /by [end time]`                 | `deadline return book /by Sunday`<br> `deadline return book /by 2025-08-17` <br> `deadline return book /by 2025-08-17 1800` |
+| Add Event | `event [description] /from [start time] /to [end time]` | `event team project /from 2025-08-17 /to 2025-08-25 1800`                                                                |
+| Mark | `mark [index]`                                          | `mark 2`                                                                                                                 |
+| Unmark | `unmark [index]`                                        | `unmark 2`                                                                                                               |
+| List | `list`                                                  | `list`                                                                                                                   |
+| Delete | `delete [index]`                                        | `delete 2`                                                                                                               |
+| Find | `find [keyword]`                                        | `find book`                                                                                                              |
+| Exit | `bye` | `bye`                                                                                                                         |
+| Undo | `undo` | `undo`                                                                                                                         |

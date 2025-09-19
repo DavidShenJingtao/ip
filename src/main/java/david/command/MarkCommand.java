@@ -60,7 +60,7 @@ public class MarkCommand extends Command {
     }
 
     private String buildMessage(Task t) {
-        return "Nice! I've mark this task as done:\n  " + t;
+        return "Nice! I've marked this task as done:\n  " + t;
     }
 
     private static boolean isInteger(String s) {
